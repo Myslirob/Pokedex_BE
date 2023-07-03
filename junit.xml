@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="15" failures="0" errors="0" time="2.459">
+  <testsuite name="Graphql" errors="0" failures="0" skipped="0" timestamp="2023-07-03T05:25:49" time="1.759" tests="15">
+    <testcase classname="Graphql Mutation Should mark pokemon as favorite" name="Graphql Mutation Should mark pokemon as favorite" time="0.184">
+    </testcase>
+    <testcase classname="Graphql Mutation Should unmark pokemon as favorite" name="Graphql Mutation Should unmark pokemon as favorite" time="0.022">
+    </testcase>
+    <testcase classname="Graphql Queries Should return pokemon by id" name="Graphql Queries Should return pokemon by id" time="0.016">
+    </testcase>
+    <testcase classname="Graphql Queries Should return pokemon by name" name="Graphql Queries Should return pokemon by name" time="0.014">
+    </testcase>
+    <testcase classname="Graphql Queries Should return pokemons by filter isFavorite" name="Graphql Queries Should return pokemons by filter isFavorite" time="0.022">
+    </testcase>
+    <testcase classname="Graphql Queries Should return pokemons by filter type" name="Graphql Queries Should return pokemons by filter type" time="0.034">
+    </testcase>
+    <testcase classname="Graphql Queries Should return pokemons by filter type &amp; limit &amp; offset" name="Graphql Queries Should return pokemons by filter type &amp; limit &amp; offset" time="0.081">
+    </testcase>
+    <testcase classname="Graphql Queries Should return pokemons by filter type &amp; isFavorite" name="Graphql Queries Should return pokemons by filter type &amp; isFavorite" time="0.015">
+    </testcase>
+    <testcase classname="Graphql Queries Should return pokemons by filter search &amp; isFavorite &amp; type" name="Graphql Queries Should return pokemons by filter search &amp; isFavorite &amp; type" time="0.014">
+    </testcase>
+    <testcase classname="Graphql Queries Should return Pikachu by search &quot;PI&quot;" name="Graphql Queries Should return Pikachu by search &quot;PI&quot;" time="0.026">
+    </testcase>
+    <testcase classname="Graphql Queries Should return Pikachu by search &quot;KACH&quot;" name="Graphql Queries Should return Pikachu by search &quot;KACH&quot;" time="0.008">
+    </testcase>
+    <testcase classname="Graphql Queries Should return Pikachu by search &quot;pika&quot;" name="Graphql Queries Should return Pikachu by search &quot;pika&quot;" time="0.007">
+    </testcase>
+    <testcase classname="Graphql Queries Should return Pikachu by search &quot;pikachu&quot;" name="Graphql Queries Should return Pikachu by search &quot;pikachu&quot;" time="0.008">
+    </testcase>
+    <testcase classname="Graphql Queries Should return empty array on search" name="Graphql Queries Should return empty array on search" time="0.004">
+    </testcase>
+    <testcase classname="Graphql Should return pokemon types" name="Graphql Should return pokemon types" time="0.005">
+    </testcase>
+  </testsuite>
+</testsuites>

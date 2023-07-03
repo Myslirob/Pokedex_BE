@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Graphql Queries Should return pokemon by id 1`] = `
+{
+  "body": {
+    "data": {
+      "pokemonById": {
+        "id": Any<String>,
+        "isFavorite": false,
+        "maxCP": Any<Number>,
+        "maxHP": Any<Number>,
+        "name": Any<String>,
+        "resistant": [
+          "Water",
+          "Electric",
+          "Grass",
+          "Fighting",
+          "Fairy",
+        ],
+        "types": [
+          "Grass",
+          "Poison",
+        ],
+        "weaknesses": [
+          "Fire",
+          "Ice",
+          "Flying",
+          "Psychic",
+        ],
+      },
+    },
+  },
+  "status": 200,
+}
+`;
+
+exports[`Graphql Queries Should return pokemon by name 1`] = `
+{
+  "body": {
+    "data": {
+      "pokemonByName": {
+        "id": Any<String>,
+        "isFavorite": false,
+        "maxCP": Any<Number>,
+        "maxHP": Any<Number>,
+        "name": Any<String>,
+        "resistant": [
+          "Fire",
+          "Grass",
+          "Ice",
+          "Bug",
+          "Steel",
+          "Fairy",
+        ],
+        "types": [
+          "Fire",
+        ],
+        "weaknesses": [
+          "Water",
+          "Ground",
+          "Rock",
+        ],
+      },
+    },
+  },
+  "status": 200,
+}
+`;
+
+exports[`Graphql Should return pokemon types 1`] = `
+{
+  "body": {
+    "data": {
+      "pokemonTypes": [
+        "Bug",
+        "Dragon",
+        "Electric",
+        "Fairy",
+        "Fighting",
+        "Fire",
+        "Flying",
+        "Ghost",
+        "Grass",
+        "Ground",
+        "Ice",
+        "Normal",
+        "Poison",
+        "Psychic",
+        "Rock",
+        "Steel",
+        "Water",
+      ],
+    },
+  },
+  "status": 200,
+}
+`;
