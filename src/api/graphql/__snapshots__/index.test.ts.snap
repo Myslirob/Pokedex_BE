@@ -1,12 +1,62 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Graphql Queries Should return correct error when pokemon doesn't exist 1`] = `
+{
+  "body": {
+    "data": {
+      "pokemonById": null,
+    },
+    "errors": [
+      {
+        "extensions": {
+          "code": "POKEMON_NOT_FOUND",
+        },
+        "locations": [
+          {
+            "column": 19,
+            "line": 2,
+          },
+        ],
+        "message": "Pokemon with id xxx doesn't exist",
+        "path": [
+          "pokemonById",
+        ],
+      },
+    ],
+  },
+  "status": 200,
+}
+`;
+
 exports[`Graphql Queries Should return pokemon by id 1`] = `
 {
   "body": {
     "data": {
       "pokemonById": {
+        "attacks": {
+          "fast": [
+            {
+              "damage": 12,
+              "name": "Tackle",
+            },
+            {
+              "damage": 7,
+              "name": "Vine Whip",
+            },
+          ],
+        },
+        "evolutions": [
+          {
+            "id": "002",
+            "name": "Ivysaur",
+          },
+          {
+            "id": "003",
+            "name": "Venusaur",
+          },
+        ],
         "id": Any<String>,
-        "isFavorite": false,
+        "isFavorite": Any<Boolean>,
         "maxCP": Any<Number>,
         "maxHP": Any<Number>,
         "name": Any<String>,
@@ -40,25 +90,26 @@ exports[`Graphql Queries Should return pokemon by name 1`] = `
     "data": {
       "pokemonByName": {
         "id": Any<String>,
-        "isFavorite": false,
+        "isFavorite": Any<Boolean>,
         "maxCP": Any<Number>,
         "maxHP": Any<Number>,
         "name": Any<String>,
         "resistant": [
-          "Fire",
+          "Water",
+          "Electric",
           "Grass",
-          "Ice",
-          "Bug",
-          "Steel",
+          "Fighting",
           "Fairy",
         ],
         "types": [
-          "Fire",
+          "Grass",
+          "Poison",
         ],
         "weaknesses": [
-          "Water",
-          "Ground",
-          "Rock",
+          "Fire",
+          "Ice",
+          "Flying",
+          "Psychic",
         ],
       },
     },

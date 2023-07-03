@@ -1,4 +1,5 @@
 import { arg, idArg, inputObjectType, nonNull, objectType, stringArg } from 'nexus';
+import { GraphQLError } from 'graphql/error';
 
 import { Type } from '../../../../model/type';
 import { Pokemon as PokemonEntity } from '../../../../model/pokemon';
@@ -19,7 +20,7 @@ export const Query = objectType({
                 query: arg({ type: nonNull(PokemonsQueryInput) }),
             },
             resolve: async (source, { query }) => {
-                // @todo There is duplicit code via project, but I didn't have time for find correct type with populated evolution and attacks in mongoose for isolate this code to map function
+                // @todo There is duplicity code via project, but I didn't have time for find correct type with populated evolution and attacks in mongoose for isolate this code to map function
                 const filter = {
                     ...(query.filter?.type === undefined ? {} : { types: query.filter?.type }),
                     ...(query.filter?.isFavorite === undefined ? {} : { isFavorite: query.filter.isFavorite === true }),
@@ -61,12 +62,12 @@ export const Query = objectType({
                 name: nonNull(stringArg()),
             },
             resolve: async (source, args) => {
-                // @todo There is duplicit code via project, but I didn't have time for find correct type with populated evolution and attacks in mongoose for isolate this code to map function
+                // @todo There is duplicity code via project, but I didn't have time for find correct type with populated evolution and attacks in mongoose for isolate this code to map function
                 const pokemon = await PokemonEntity.findOne({ name: args.name }).populate<{
                     evolutions: Document<typeof Pokemon>[];
                     attacks: { special: Document<typeof Attack>[]; fast: Document<typeof Attack>[] };
                 }>(['attacks.special', 'attacks.fast', 'evolutions']).exec();
-                if (pokemon === null) throw new Error('Not found!');
+                if (pokemon === null) throw new GraphQLError(`Pokemon with name ${args.name} doesn't exist`, { extensions: { code: 'POKEMON_NOT_FOUND' } });
                 const { _id, ...data } = pokemon.toObject();
                 const attacks = {
                     fast: (pokemon.attacks?.fast ?? []).map((attack) => attack.toObject()),
@@ -92,12 +93,12 @@ export const Query = objectType({
                 id: nonNull(idArg()),
             },
             resolve: async (source, args) => {
-                // @todo There is duplicit code via project, but I didn't have time for find correct type with populated evolution and attacks in mongoose for isolate this code to map function
+                // @todo There is duplicity code via project, but I didn't have time for find correct type with populated evolution and attacks in mongoose for isolate this code to map function
                 const pokemon = await PokemonEntity.findById(args.id).populate<{
                     evolutions: Document<typeof Pokemon>[];
                     attacks: { special: Document<typeof Attack>[]; fast: Document<typeof Attack>[] };
                 }>(['attacks.special', 'attacks.fast', 'evolutions']).exec();
-                if (pokemon === null) throw new Error('Not found!');
+                if (pokemon === null) throw new GraphQLError(`Pokemon with id ${args.id} doesn't exist`, { extensions: { code: 'POKEMON_NOT_FOUND' } });
                 const { _id, ...data } = pokemon.toObject();
                 const attacks = {
                     fast: (pokemon.attacks?.fast ?? []).map((attack) => attack.toObject()),

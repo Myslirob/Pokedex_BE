@@ -14,6 +14,10 @@ describe('Graphql', () => {
         fastifyServer = createFastifyServer();
     });
 
+    afterAll(async () => {
+        (await fastifyServer).close();
+    });
+
     describe('Mutation', () => {
         it('Should mark pokemon as favorite', async () => {
             const pokemon = await Pokemon.findById(getNextPokemonId());
@@ -74,7 +78,7 @@ describe('Graphql', () => {
 
     describe('Queries', () => {
         it('Should return pokemon by id', async () => {
-            const pokemon = await Pokemon.findById(getNextPokemonId());
+            const pokemon = await Pokemon.findById('001');
             assertNotNull(pokemon);
 
             const queryData = {
@@ -88,6 +92,16 @@ describe('Graphql', () => {
                     resistant
                     maxCP
                     maxHP
+                    attacks {
+                      fast {
+                        name
+                        damage
+                      }
+                    }
+                    evolutions {
+                      name
+                      id
+                    }
                   }
                 }`,
                 variables: { pokemonByIdId: pokemon.id },
@@ -107,10 +121,35 @@ describe('Graphql', () => {
                             name: expect.any(String),
                             maxCP: expect.any(Number),
                             maxHP: expect.any(Number),
+                            isFavorite: expect.any(Boolean),
                         },
                     },
                 },
             });
+        });
+
+        it('Should return correct error when pokemon doesn\'t exist', async () => {
+            const queryData = {
+                query: `query PokemonById($pokemonByIdId: ID!) {
+                  pokemonById(id: $pokemonByIdId) {
+                    id
+                    isFavorite
+                    name
+                    types
+                    weaknesses
+                    resistant
+                    maxCP
+                    maxHP
+                  }
+                }`,
+                variables: { pokemonByIdId: 'xxx' },
+            };
+            const response = await supertest((await fastifyServer).server)
+                .post('/api/graphql')
+                .set('Content-Type', 'application/json')
+                .send(queryData);
+            const responseData = toResponseObject(response);
+            expect(responseData).toMatchSnapshot();
         });
 
         it('Should return pokemon by name', async () => {
@@ -147,6 +186,7 @@ describe('Graphql', () => {
                             name: expect.any(String),
                             maxCP: expect.any(Number),
                             maxHP: expect.any(Number),
+                            isFavorite: expect.any(Boolean),
                         },
                     },
                 },
